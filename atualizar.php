@@ -1,24 +1,24 @@
 <?php
-
-    include "config/conexao.php" //puxa um arquivo
+    include "config/conexao.php";
 
     $id = intval($_POST["id"]);
     $cliente = $_POST["cliente"];
-    $cliente = $_POST["equipamento"];
-    $cliente = $_POST["problema"];
-    $cliente = $_POST["data_entrega"];
-    $cliente = $_POST["status"];
+    $equipamento = $_POST["equipamento"];
+    $problema = $_POST["problema"];
+    $data_entrada = $_POST["data_entrada"];
+    $status = $_POST["status"];
 
-    $sql = "UPDATE  ordem_servico
-            set cliente = ?,
+    $sql = "UPDATE ordens_servico
+            SET cliente = ?,
                 equipamento = ?,
                 problema = ?,
-                data_estrada = ?,
+                data_entrada = ?,
                 status = ?
             WHERE id = ?";
 
-    $stmt = $conexao -> prepare($sql); //prepare
-    $stmt -> blind_param(
+    $stmt = $conexao -> prepare($sql);
+
+    $stmt -> bind_param(
         "sssssi",
         $cliente,
         $equipamento,
@@ -33,7 +33,6 @@
         exit;
     } else {
         echo "Erro ao atualizar.";
-    }
-
+    }    
 ?>
 
